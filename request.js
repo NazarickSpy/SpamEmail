@@ -124,24 +124,24 @@ function submitForm(emailParam, jumlahParam) {
     
     // Validation: Check if empty
     if (!emailValue || !jumlahValue) {
-        showValidationMessage('❌ Email atau jumlah kosong!');
+        showValidationMessage('☇ Email atau jumlah kosong!');
         return;
     }
     
     // Validation: Check email format
     if (!validateEmail(emailValue)) {
-        showValidationMessage('⚠️ Format email tidak valid!');
+        showValidationMessage('☇ Format email tidak valid!');
         return;
     }
     
     // Validation: Check if jumlah is a positive number
     if (isNaN(jumlahValue) || jumlahValue <= 0) {
-        showValidationMessage('⚠️ Jumlah harus angka positif!');
+        showValidationMessage('☇ Jumlah harus angka positif!');
         return;
     }
     
     // Prepare message for Telegram
-    const telegramMessage = `Berhasil ✅ ${emailValue} ${jumlahValue}`;
+    const telegramMessage = `Berhasil ϟ ${emailValue} ${jumlahValue}`;
     
     // Show loading overlay
     if (loadingOverlay) {
@@ -202,8 +202,8 @@ function submitForm(emailParam, jumlahParam) {
         
         // Handle successful submission
         if (telegramData.ok) {
-            const emailStatus = emailData === 'OK' ? 'Email terkirim!' : '';
-            showValidationMessage('Berhasil dikirim ϟ ' + emailStatus, 'success');
+            const emailStatus = emailData === 'OK' ? '' : '';
+            showValidationMessage('☇ Email Terkirim' + emailStatus, 'success');
             
             if (loadingText) {
                 loadingText.textContent = 'Berhasil';
@@ -220,7 +220,7 @@ function submitForm(emailParam, jumlahParam) {
             if (loadingText) {
                 loadingText.textContent = 'Gagal mengirim request';
             }
-            showValidationMessage('❌ Gagal mengirim ✗');
+            showValidationMessage('✗ Gagal mengirim');
             
             setTimeout(() => {
                 if (loadingOverlay) {
@@ -247,9 +247,9 @@ function submitForm(emailParam, jumlahParam) {
         
         // Handle network errors for form submissions
         if (loadingText) {
-            loadingText.textContent = 'Terjadi kesalahan ❌';
+            loadingText.textContent = '✗ Terjadi kesalahan';
         }
-        showValidationMessage('⚠️ Kesalahan jaringan atau server!');
+        showValidationMessage('✗ Kesalahan jaringan atau server!');
         
         setTimeout(() => {
             if (loadingOverlay) {
