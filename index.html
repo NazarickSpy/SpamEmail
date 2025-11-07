@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Spam Email</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME & BACKGROUND ===== */
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #dbeafe, #e0f2fe, #f0f9ff);
+  background-size: 400% 400%;
+  animation: bgMove 12s ease infinite;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== HEADER ===== */
+header {
+  text-align: center;
+  padding: 60px 20px 30px;
+  color: #2563eb;
+}
+header h1 {
+  font-size: 2.3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+header p {
+  font-size: 1.1em;
+  color: #475569;
+}
+
+/* ===== CARD ===== */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(15px);
+  border-radius: 22px;
+  padding: 35px 25px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+  text-align: center;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 1s ease;
+}
+.card.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.card h3 {
+  color: #2563eb;
+  font-size: 1.7em;
+  margin-bottom: 25px;
+}
+
+/* ===== INFO GROUP ===== */
+.info-group {
+  background: rgba(255,255,255,0.8);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  border-left: 5px solid #2563eb;
+  transition: all 0.4s ease;
+}
+.info-group:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+.info-item {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.info-item:last-child { margin-bottom: 0; }
+.info-item h4 {
+  color: #2563eb;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+.info-item p {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1.05em;
+  margin: 0;
+}
+
+/* ===== BUTTON ===== */
+.get-button {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 40px;
+  font-weight: 600;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 15px rgba(37,99,235,0.4);
+  margin-top: 25px;
+}
+.get-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(37,99,235,0.6);
+}
+.get-button:active {
+  transform: scale(0.96);
+}
+
+/* ===== TELEGRAM BUTTON ===== */
+#telegram-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #229ED9, #0088cc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: transform 0.4s, box-shadow 0.4s;
+  z-index: 1000;
+  animation: pulse 2.5s infinite;
+}
+#telegram-float img { width: 35px; height: 35px; }
+#telegram-float:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,136,204,0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(0,136,204,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,136,204,0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  header h1 { font-size: 1.8em; }
+  .card { padding: 25px 18px; }
+  .get-button { width: 100%; }
+}
+.card-img {
+  width: 100%;
+  height: 180px;
+  border-radius: 18px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease;
+}
+.card-img:hover {
+  transform: scale(1.03);
+}
+/* ====== CUSTOM ADDITION FOR CARDS & TELEGRAM FLOAT BUTTON - REMOVING TAP HIGHLIGHTS/OUTLINES ====== */
+.card,
+.info-card,
+#telegram-float { /* Menambahkan ID tombol Telegram mengambang di sini */
+  /* Menghilangkan highlight transparan yang muncul saat disentuh (tap) di browser berbasis WebKit (seperti Chrome/Safari di HP) */
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Memastikan tidak ada border luar (outline) yang muncul saat elemen difokuskan (diklik/di-tab) */
+  outline: none !important;
+  
+  /* Memastikan tidak ada efek bayangan (box-shadow) yang muncul saat elemen difokuskan */
+  box-shadow: none !important; 
+}
+
+/* Pastikan juga Anda tidak ingin menghilangkan box-shadow yang sudah ada pada #telegram-float 
+   yang memberikan efek mengambang (shadow yang ditambahkan oleh properti box-shadow di CSS aslinya).
+   Karena properti 'box-shadow: none !important;' di atas akan menimpa shadow bawaan. 
+   Jika Anda hanya ingin menghilangkan BOX saat fokus/tap, Anda bisa menghapus 'box-shadow: none !important;' 
+   dari blok di atas dan mengandalkan 'outline: none !important;' dan '-webkit-tap-highlight-color: transparent;' saja.
+   
+   Namun, jika Anda ingin agar saat fokus/tap, *hanya* box-shadow yang muncul karena animasi 'pulse' dan 'hover' saja yang terlihat,
+   dan bukan box-shadow default browser, maka penggunaan di atas sudah benar.
+*/
+
+/* JANGAN LUPA untuk tetap mempertahankan rules untuk tombol, input, dan textarea: */
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>WELCOME</h1>
+</header>
+
+<div class="container">
+  <div class="card" id="mainCard">
+  <img src="foto.png" alt="Gambar"
+  class="card-img">
+  <div class="info-group">
+    <div class="info-item">
+      <h4>Ip Publik</h4>
+      <p id="ip">Memuat...</p>
+    </div>
+    <div class="info-item">
+      <h4>Baterai</h4>
+      <p id="battery">Memuat...</p>
+    </div>
+    <div class="info-item">
+      <h4>Charging</h4>
+      <p id="charging">Memuat...</p>
+    </div>
+  </div>
+  <button class="get-button" onclick="redirectIndex()">Mulai</button>
+</div>
+</div>
+
+<a href="https://t.me/nazarickspy" target="_blank" id="telegram-float">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+</a>
+<script src="script.js"></script>
+</body>
+</html>
